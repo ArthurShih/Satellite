@@ -55,8 +55,7 @@ t = np.arange(0,10000,0.1)
 
 # TODO: Solve system
 from scipy.integrate import odeint
-# Initial condition
-x0 = np.array([[0],[0],[0],[0]])
+
 # closed loop B,C,D
 Bcl = np.array([[0],
 				[0],
@@ -72,7 +71,7 @@ def system(x,t,Acl_u2):
 	xdot = Acl_u2.dot(x)
 	return xdot
 
-x0 = np.array([1,1,1,1])
+x0 = np.array([0,1,1,1])
 
 y_u2 = odeint(system, x0, t, args=(Acl_u2,))
 
@@ -85,15 +84,19 @@ plt.figure(1)
 plt.suptitle("Controlling a satellite in circular orbit by u2 only")
 plt.subplot(221)
 plt.plot(t, satellite_radius)
-plt.ylabel("r")
+plt.xlabel("t")
+plt.ylabel("rhat")
 plt.subplot(222)
 plt.plot(t, theta)
+plt.xlabel("t")
 plt.ylabel("theta")
 plt.subplot(223)
 plt.plot(t, rdot)
+plt.xlabel("t")
 plt.ylabel("rdot")
 plt.subplot(224)
 plt.plot(t, thetadot)
+plt.xlabel("t")
 plt.ylabel("thetadot")
 print("------------------------------------------------------------------")
 #####################################################################################################
@@ -127,18 +130,22 @@ plt.figure(2)
 plt.suptitle("Controlling a satellite in circular orbit by u1 only")
 plt.subplot(221)
 plt.plot(t, satellite_radius)
-plt.ylabel("r")
+plt.xlabel("t")
+plt.ylabel("rhat")
 plt.subplot(222)
 plt.plot(t, theta)
+plt.xlabel("t")
 plt.ylabel("theta")
 plt.subplot(223)
 plt.plot(t, rdot)
+plt.xlabel("t")
 plt.ylabel("rdot")
 plt.subplot(224)
 plt.plot(t, thetadot)
+plt.xlabel("t")
 plt.ylabel("thetadot")
 print("------------------------------------------------------------------")
-#####################################################################################################
+# #####################################################################################################
 # Control by u1 and u2
 print("CONTROL BY U1 AND U2")
 R = rho*np.eye(2)
@@ -169,14 +176,18 @@ plt.figure(3)
 plt.suptitle("Controlling a satellite in circular orbit by u1 and u2")
 plt.subplot(221)
 plt.plot(t, satellite_radius)
-plt.ylabel("r")
+plt.xlabel("t")
+plt.ylabel("rhat")
 plt.subplot(222)
 plt.plot(t, theta)
+plt.xlabel("t")
 plt.ylabel("theta")
 plt.subplot(223)
 plt.plot(t, rdot)
+plt.xlabel("t")
 plt.ylabel("rdot")
 plt.subplot(224)
 plt.plot(t, thetadot)
+plt.xlabel("t")
 plt.ylabel("thetadot")
 plt.show()
