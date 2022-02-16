@@ -58,7 +58,7 @@ Dzu = np.array([[0,0],
 				[0,0],
 				[0,0],
 				[1,0],
-				[0,1]]) # NOTIC: Cz'*Dzu = 0
+				[0,1]]) # NOTICE: Cz'*Dzu = 0
 
 # Find K
 Qk = np.transpose(Cz).dot(Cz)
