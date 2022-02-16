@@ -14,11 +14,12 @@
 ###### Bu = [[0,0],[0,0],[1/m,0],[0,1/(m*rbar)]]
 ###### Bw = [[0,0],[0,0],[1/m,0],[0,1/(m*rbar)]]
 ###### Q = I, R = I
+###### Initial state = [1,0,0,1]
 ###### Here, Imma control the satellite in circular orbit by three choices of input
 ###### .
 ## LQR control
 #### 1. by u2 only
-###### Bu2 = [[0],[0],[0],[1/(m*rabr)]
+###### Bu2 = [[0],[0],[0],[1/(m*rabr)]]
 ###### State plot
 ![u2 control](https://github.com/ArthurShih/Satellite_control/blob/master/figure/control_u2.png)
 ###### Properties
@@ -39,3 +40,4 @@
 ###### Properties
 ![u1u2 property](https://github.com/ArthurShih/Satellite_control/blob/master/figure/u1_u2_property.png)
 ###### . 
+## Optimal State Estimation

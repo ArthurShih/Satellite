@@ -71,7 +71,7 @@ def system(x,t,Acl_u2):
 	xdot = Acl_u2.dot(x)
 	return xdot
 
-x0 = np.array([0,1,1,1])
+x0 = np.array([1,0,0,1])
 
 y_u2 = odeint(system, x0, t, args=(Acl_u2,))
 
@@ -81,24 +81,26 @@ rdot = y_u2[:,2]
 thetadot = y_u2[:,3]
 
 plt.figure(1)
-plt.suptitle("Controlling a satellite in circular orbit by u2 only")
+plt.suptitle("State: by u2 only")
 plt.subplot(221)
+plt.title("rhat")
 plt.plot(t, satellite_radius)
-plt.xlabel("t")
-plt.ylabel("rhat")
+
 plt.subplot(222)
+plt.title("theta")
 plt.plot(t, theta)
-plt.xlabel("t")
-plt.ylabel("theta")
+
 plt.subplot(223)
+plt.title("rhat dot")
 plt.plot(t, rdot)
 plt.xlabel("t")
-plt.ylabel("rdot")
+
 plt.subplot(224)
+plt.title("theta dot")
 plt.plot(t, thetadot)
 plt.xlabel("t")
-plt.ylabel("thetadot")
 print("------------------------------------------------------------------")
+
 #####################################################################################################
 # Control by u1 only
 print("CONTROL BY U1 ONLY")
@@ -127,24 +129,26 @@ rdot = y_u1[:,2]
 thetadot = y_u1[:,3]
 
 plt.figure(2)
-plt.suptitle("Controlling a satellite in circular orbit by u1 only")
+plt.suptitle("State: by u1 only")
 plt.subplot(221)
+plt.title("rhat")
 plt.plot(t, satellite_radius)
-plt.xlabel("t")
-plt.ylabel("rhat")
+
 plt.subplot(222)
+plt.title("theta")
 plt.plot(t, theta)
-plt.xlabel("t")
-plt.ylabel("theta")
+
 plt.subplot(223)
+plt.title("rhat dot")
 plt.plot(t, rdot)
 plt.xlabel("t")
-plt.ylabel("rdot")
+
 plt.subplot(224)
+plt.title("theta dot")
 plt.plot(t, thetadot)
 plt.xlabel("t")
-plt.ylabel("thetadot")
 print("------------------------------------------------------------------")
+
 # #####################################################################################################
 # Control by u1 and u2
 print("CONTROL BY U1 AND U2")
@@ -163,7 +167,7 @@ def system(x,t,Acl):
 	xdot = Acl.dot(x)
 	return xdot
 
-x0 = np.array([1,1,1,1])
+x0 = np.array([1,0,0,1])
 
 y = odeint(system, x0, t, args=(Acl,))
 
@@ -173,21 +177,22 @@ rdot = y[:,2]
 thetadot = y[:,3]
 
 plt.figure(3)
-plt.suptitle("Controlling a satellite in circular orbit by u1 and u2")
+plt.suptitle("State: by u1 and u2")
 plt.subplot(221)
+plt.title("rhat")
 plt.plot(t, satellite_radius)
-plt.xlabel("t")
-plt.ylabel("rhat")
+
 plt.subplot(222)
+plt.title("theta")
 plt.plot(t, theta)
-plt.xlabel("t")
-plt.ylabel("theta")
+
 plt.subplot(223)
+plt.title("rhat dot")
 plt.plot(t, rdot)
 plt.xlabel("t")
-plt.ylabel("rdot")
+
 plt.subplot(224)
+plt.title("theta dot")
 plt.plot(t, thetadot)
 plt.xlabel("t")
-plt.ylabel("thetadot")
 plt.show()

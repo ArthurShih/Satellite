@@ -1,5 +1,5 @@
 # TODO: Controlling a satellite in circular orbit
-# LQR
+# Estimator
 import numpy as np 
 import matplotlib.pyplot as plt
 import control
@@ -39,17 +39,17 @@ Q = Bw.dot(W).dot(np.transpose(Bw))
 R = Dyw.dot(W).dot(np.transpose(Dyw))
 [F,X,E] = control.lqr(At,C,Q,R)
 F = -np.transpose(F)
-print(F)
+print("F =\n",F)
 eigenvalue, eigenvector = eig(A+F.dot(Cy))
-print(eigenvalue)
+print("Eigenvalue of A+F*C =\n",eigenvalue)
 
 # Simulation parameters
 t_start = 0
-t_end = 1500000
+t_end = 100000
 t_step = 0.1
 t = np.arange(t_start, t_end, t_step)
-x0 = np.array([0,0,0,0])
-xhat0 = np.array([0,0,-6,0])
+x0 = np.array([1,0,0,1])
+xhat0 = np.array([0,0,0,0])
 f0 = np.concatenate((x0,xhat0))
 w = np.random.randn(1)*np.eye(3)
 
@@ -66,26 +66,52 @@ f = odeint(sys, f0, t)
 
 x = f[:,0:4]
 xhat = f[:,4:8]
-plt.figure()
-plt.subplot(421)
-plt.plot(t,x[:,0])
-plt.plot(t,xhat[:,0])
-plt.subplot(422)
-plt.plot(t,x[:,1])
-plt.plot(t,xhat[:,1])
-plt.subplot(423)
-plt.plot(t,x[:,2])
-plt.plot(t,xhat[:,2])
-plt.subplot(424)
-plt.plot(t,x[:,3])
-plt.plot(t,xhat[:,3])
+
+plt.figure(1)
+plt.suptitle("State")
+plt.subplot(221)
+plt.title("radius")
+plt.plot(t,x[:,0],"b-")
+plt.plot(t,xhat[:,0],"g-")
+plt.legend(["r","r measure"])
+
+plt.subplot(222)
+plt.title("theta")
+plt.plot(t,x[:,1],"b-")
+plt.plot(t,xhat[:,1],"g-")
+plt.legend(["theta","theta measure"])
+
+plt.subplot(223)
+plt.title("radius dot")
+plt.plot(t,x[:,2],"b-")
+plt.plot(t,xhat[:,2],"g-")
+plt.legend(["radius dot","radius dot measure"])
+plt.xlabel("t")
+
+plt.subplot(224)
+plt.plot(t,x[:,3],"b-")
+plt.plot(t,xhat[:,3],"g-")
+plt.legend(["theta dot","theta dot measure"])
+plt.xlabel("t")
+
 e = xhat - x
-plt.subplot(425)
-plt.plot(t,e[:,0])
-plt.subplot(426)
-plt.plot(t,e[:,1])
-plt.subplot(427)
-plt.plot(t,e[:,2])
-plt.subplot(428)
-plt.plot(t,e[:,3])
+plt.figure(2)
+plt.suptitle("Error")
+plt.subplot(221)
+plt.plot(t,e[:,0],"r-")
+plt.title("r - r measure")
+
+plt.subplot(222)
+plt.plot(t,e[:,1],"r-")
+plt.title("theta - theta measure")
+
+plt.subplot(223)
+plt.plot(t,e[:,2],"r-")
+plt.title("r dot - r dot measure")
+plt.xlabel("t")
+
+plt.subplot(224)
+plt.plot(t,e[:,3],"r-")
+plt.title("theta dot - theta dot measure")
+plt.xlabel("t")
 plt.show()

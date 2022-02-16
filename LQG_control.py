@@ -100,22 +100,22 @@ system1 = control.ss(Acl,Bcl,Ccl1,Dcl)
 system2 = control.ss(Acl,Bcl,Ccl2,Dcl)
 print("\n#1\n")
 plt.figure(1)
-zero, pole = control.pzmap(system1,plot=True)
+pole, zero = control.pzmap(system1,plot=True)
 print("\nZeros =\n",zero)
 print("\nPoles =\n",pole)
 print("\n#2\n")
 plt.figure(2)
-zero, pole = control.pzmap(system2,plot=True)
+pole, zero = control.pzmap(system2,plot=True)
 print("\nZeros =\n",zero)
 print("\nPoles =\n",pole)
 
 # Simulation parameters
 t_start = 0 
-t_end = 10000
+t_end = 100000
 t_step = 0.1
 t = np.arange(t_start, t_end, t_step)
-x0 = [0,0,0,0]
-xhat0 = [0,0,-6,0]
+x0 = [1,0,0,1]
+xhat0 = [0,0,0,0]
 f0 = np.array(x0+xhat0)
 
 # SYSTEM
@@ -135,17 +135,22 @@ e1 = e[:,0]
 e2 = e[:,1]
 e3 = e[:,2]
 e4 = e[:,3]
-plt.figure(2)
+plt.figure(3)
 plt.subplot(221)
-plt.plot(t,e1)
-plt.title("e1")
+plt.plot(t,e1,"r-")
+plt.title("r error")
+
 plt.subplot(222)
-plt.plot(t,e2)
-plt.title("e2")
+plt.plot(t,e2,"r-")
+plt.title("theta error")
+
 plt.subplot(223)
-plt.plot(t,e3)
-plt.title("e3")
+plt.plot(t,e3,"r-")
+plt.title("rdot error")
+plt.xlabel("t")
+
 plt.subplot(224)
-plt.plot(t,e4)
-plt.title("e4")
+plt.plot(t,e4,"r-")
+plt.title("theta dot error")
+plt.xlabel("t")
 plt.show()
